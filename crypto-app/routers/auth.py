@@ -1,17 +1,22 @@
+import sys
+
+sys.path.append("..")
+import models
 from datetime import timedelta, datetime
 from typing import Optional, Annotated
-from urllib.request import Request
 from passlib.context import CryptContext
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request, Response
 from jose import jwt, JWTError
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from starlette import status
 from starlette.exceptions import HTTPException
-
-import models
 from database import SessionLocal
+from sqlalchemy.orm import Session
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from starlette.responses import RedirectResponse
 
-router = APIRouter(
+routers = APIRouter(
     prefix="/auth",
     tags=["auth"],
     responses={401: {"user": "Not authorized"}}
@@ -22,6 +27,7 @@ ALGORITHM = "HS256"
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oath2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
 
+templates = Jinja2Templates(directory="templates")
 
 class LoginForm:
     def __init__(self, request: Request):
@@ -68,7 +74,7 @@ def create_access_token(username: str, user_id: int, expires_delta: Optional[tim
     else:
         expire = datetime.utcnow() + timedelta(minutes=15)
     encode.update({"exp": expire})
-    return jwt.encode(SECRET_KEY, algorithm=ALGORITHM)
+    return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
 async def get_current_user(token: Annotated[str, Depends(oath2_bearer)]):
@@ -82,3 +88,31 @@ async def get_current_user(token: Annotated[str, Depends(oath2_bearer)]):
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate user.")
 
+
+@routers.post("/token")
+async def login_for_access_token(response: Response, form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = authenticate_user(form_data.username, form_data.password, db)
+    if not user:
+        return False
+    token_expires = timedelta(minutes=60)
+    token = create_access_token(user.username, user.id, expires_delta=token_expires)
+    response.set_cookie(key="access_token", value=token, httponly=True)
+    return True
+
+
+@routers.post("/", response_class=HTMLResponse)
+async def login(request: Request, db: Session = Depends(get_db)):
+    try:
+        form = LoginForm(request)
+        await form.create_oauth_form()
+        response = RedirectResponse(url="/crypto")
+
+        validate_user_cookie = await login_for_access_token(response=response, form_data=form, db=db)
+
+        if not validate_user_cookie:
+            msg = "Incorrect username or password"
+            return templates.TemplateResponse("login.html", {"request": request, "msg": msg})
+        return response
+    except HTTPException:
+        msg = "Unknown Error"
+        return templates.TemplateResponse("login.html", {"request": request, "msg": msg})
