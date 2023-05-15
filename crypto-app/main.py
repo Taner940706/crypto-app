@@ -2,7 +2,8 @@ from fastapi import FastAPI, Depends
 import models
 from database import engine
 from routers import crypto
-from starlette.staticfiles import StaticFiles
+from fastapi.staticfiles import StaticFiles
+
 
 app = FastAPI()
 
