@@ -151,5 +151,5 @@ async def register_user(request: Request, email: str = Form(...), username: str 
     db.add(user_model)
     db.commit()
 
-    msg = "User successfully vreated!"
+    msg = "User successfully created!"
     return templates.TemplateResponse("login.html", {"request": request, "msg": msg})
