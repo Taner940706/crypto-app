@@ -5,7 +5,7 @@ import models
 from datetime import timedelta, datetime
 from typing import Optional, Annotated
 from passlib.context import CryptContext
-from fastapi import APIRouter, Depends, Request, Response
+from fastapi import APIRouter, Depends, Request, Response, Form
 from jose import jwt, JWTError
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from starlette import status
@@ -127,3 +127,29 @@ async def logout(request: Request):
     response = templates.TemplateResponse("login.html", {"request": request, "msg": msg})
     response.delete_cookie(key="access_token")
     return response
+
+
+@routers.post("/register", response_class=HTMLResponse)
+async def register_user(request: Request, email: str = Form(...), username: str = Form(...), firstname: str = Form(...),
+                        lastname: str = Form(...), password: str = Form(...), password2: str = Form(...),
+                        db: Session = Depends(get_db)):
+    validation1 = db.query(models.Users).filter(models.Users.username == username).first()
+    validation2 = db.query(models.Users).filter(models.Users.email == email).first()
+
+    if password != password2 or validation1 is not None or validation2 is not None:
+        msg = "Invalid registration!"
+        return templates.TemplateResponse("register.html", {"request": request, "msg": msg})
+
+    user_model = models.Users()
+    user_model.username = username
+    user_model.email = email
+    user_model.first_name = firstname
+    user_model.last_name = lastname
+    hash_password = get_password_hash(password)
+    user_model.password = hash_password
+
+    db.add(user_model)
+    db.commit()
+
+    msg = "User successfully vreated!"
+    return templates.TemplateResponse("login.html", {"request": request, "msg": msg})
