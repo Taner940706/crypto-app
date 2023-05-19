@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 from starlette import status
 from starlette.responses import HTMLResponse, RedirectResponse
@@ -8,16 +8,14 @@ from database import SessionLocal
 from routers.auth import get_current_user
 
 routers = APIRouter(
-    prefix="/rates",
-    tags=["rates"],
+    prefix="/exchanges",
+    tags=["exchanges"],
     responses={404: {"description": "Not found!"}}
 )
-
 
 templates = Jinja2Templates(directory="templates")
 
 
-# session local for database
 def get_db():
     db = SessionLocal()
     try:
@@ -26,26 +24,22 @@ def get_db():
         db.close()
 
 
-@routers.get('/rates', response_class=HTMLResponse)
-async def get_all_rates(request: Request, db: Session = Depends(get_db)):
+@routers.get('/exchanges', response_class=HTMLResponse)
+async def get_all_exchanges(request: Request, db: Session = Depends(get_db)):
 
     user = get_current_user(request)
 
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
-    # there must be init API
-
-    return templates.TemplateResponse('rates.html', {"request": request, "user": user})
+    return templates.TemplateResponse('exchanges.html', {"request": request, "user": user})
 
 
-@routers.get('/rates/{id}', response_class=HTMLResponse)
-async def get_rates_by_id(request: Request, db: Session = Depends(get_db)):
+@routers.get('/exchanges/{id}', response_class=HTMLResponse)
+async def get_exchanges_by_id(request: Request, db: Session = Depends(get_db)):
     user = get_current_user(request)
 
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
-    # there must be init API
-
-    return templates.TemplateResponse('rates.html', {"request": request, "user": user})
+    return templates.TemplateResponse('exchanges.html', {"request": request, "user": user})
