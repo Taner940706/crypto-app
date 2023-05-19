@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 import models
 from database import engine
-from routers import crypto
+from routers import assets
 from fastapi.staticfiles import StaticFiles
 
 
