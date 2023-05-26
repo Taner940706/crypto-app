@@ -1,9 +1,7 @@
 import sys
-
-sys.path.append("..")
 import models
 from datetime import timedelta, datetime
-from typing import Optional, Annotated
+from typing import Optional
 from passlib.context import CryptContext
 from fastapi import APIRouter, Depends, Request, Response, Form
 from jose import jwt, JWTError
@@ -15,6 +13,8 @@ from sqlalchemy.orm import Session
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
+
+sys.path.append("..")
 
 routers = APIRouter(
     prefix="/auth",

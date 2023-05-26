@@ -1,11 +1,13 @@
+import sys
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 from starlette import status
 from starlette.responses import HTMLResponse, RedirectResponse
 from starlette.templating import Jinja2Templates
-
 from database import SessionLocal
 from routers.auth import get_current_user
+
+sys.path.append("..")
 
 routers = APIRouter(
     prefix="/exchanges",

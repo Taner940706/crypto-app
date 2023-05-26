@@ -1,11 +1,16 @@
+import json
+import sys
+import urllib.request
+
 from fastapi.templating import Jinja2Templates
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 from starlette import status
 from starlette.responses import HTMLResponse, RedirectResponse
-
 from database import SessionLocal
 from routers.auth import get_current_user
+
+sys.path.append("..")
 
 routers = APIRouter(
     prefix="/assets",
@@ -33,8 +38,10 @@ async def get_all_assets(request: Request, db: Session = Depends(get_db)):
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
+    source = urllib.request.urlopen('https://api.coincap.io/v2/assets').open()
+    data = json.loads(source)
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user})
+    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
 
 
 @routers.get('assets/{id}', response_class=HTMLResponse)
@@ -45,8 +52,10 @@ async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
+    source = urllib.request.urlopen('https://api.coincap.io/v2/assets'+{id}).open()
+    data = json.loads(source)
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user})
+    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
 
 
 @routers.get('assets/{id}/market', response_class=HTMLResponse)
@@ -57,8 +66,10 @@ async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
+    source = urllib.request.urlopen('https://api.coincap.io/v2/assets' + {id} + "/market").open()
+    data = json.loads(source)
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user})
+    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
 
 
 @routers.get('assets/{id}/history', response_class=HTMLResponse)
@@ -69,5 +80,7 @@ async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
+    source = urllib.request.urlopen('https://api.coincap.io/v2/assets' + {id} + "/history").open()
+    data = json.loads(source)
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user})
+    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
