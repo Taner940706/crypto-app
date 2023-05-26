@@ -1,4 +1,6 @@
 import sys
+import json
+import urllib.request
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 from starlette import status
@@ -34,6 +36,8 @@ async def get_all_markets(request: Request, db: Session = Depends(get_db)):
     if user is None:
         return RedirectResponse('/auth', status_code=status.HTTP_302_FOUND)
 
-    # add init for API
+     # line for initialize API
+    source = urllib.request.urlopen('https://api.coincap.io/v2/markets').open()
+    data = json.loads(source)
 
     return templates.TemplateResponse('', {"request": request, "user": user})

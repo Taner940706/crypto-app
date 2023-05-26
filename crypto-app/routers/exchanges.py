@@ -37,7 +37,7 @@ async def get_all_exchanges(request: Request, db: Session = Depends(get_db)):
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
-    source = urllib.request.urlopen('https://api.coincap.io/v2/assets' + "/history").open()
+    source = urllib.request.urlopen('https://api.coincap.io/v2/exchanges').open()
     data = json.loads(source)
 
     return templates.TemplateResponse('exchanges.html', {"request": request, "user": user, "data": data})
@@ -51,7 +51,7 @@ async def get_exchanges_by_id(request: Request, db: Session = Depends(get_db)):
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
-    source = urllib.request.urlopen('https://api.coincap.io/v2/assets' + {id} + "/history").open()
+    source = urllib.request.urlopen('https://api.coincap.io/v2/exchanges' + {id}).open()
     data = json.loads(source)
 
     return templates.TemplateResponse('exchanges.html', {"request": request, "user": user, "data": data})
