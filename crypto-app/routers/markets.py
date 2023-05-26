@@ -40,4 +40,4 @@ async def get_all_markets(request: Request, db: Session = Depends(get_db)):
     source = urllib.request.urlopen('https://api.coincap.io/v2/markets').open()
     data = json.loads(source)
 
-    return templates.TemplateResponse('', {"request": request, "user": user})
+    return templates.TemplateResponse('', {"request": request, "user": user, "data": data})
