@@ -28,7 +28,7 @@ def get_db():
         db.close()
 
 
-@routers.get("/markets", response_class=HTMLResponse)
+@routers.get("/", response_class=HTMLResponse)
 async def get_all_markets(request: Request, db: Session = Depends(get_db)):
 
     user = get_current_user(request)

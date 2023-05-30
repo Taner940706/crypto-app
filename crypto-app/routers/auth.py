@@ -29,6 +29,7 @@ oath2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
 
 templates = Jinja2Templates(directory="templates")
 
+
 class LoginForm:
     def __init__(self, request: Request):
         self.request: Request = request
@@ -37,7 +38,7 @@ class LoginForm:
 
     async def create_oauth_form(self):
         form = await self.request.form()
-        self.username = form.get("email")
+        self.username = form.get("username")
         self.password = form.get("password")
 
 
@@ -61,7 +62,7 @@ def authenticate_user(username: str, password: str, db):
     user = db.query(models.Users).filter(models.Users.username == username).first()
     if not user:
         return False
-    if not verify_password(password, user.hashed_password):
+    if not verify_password(password, user.password):
         return False
     else:
         return user
@@ -103,12 +104,17 @@ async def login_for_access_token(response: Response, form_data: OAuth2PasswordRe
     return True
 
 
+@routers.get("/", response_class=HTMLResponse)
+async def authentication_page(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
+
+
 @routers.post("/", response_class=HTMLResponse)
 async def login(request: Request, db: Session = Depends(get_db)):
     try:
         form = LoginForm(request)
         await form.create_oauth_form()
-        response = RedirectResponse(url="/crypto")
+        response = RedirectResponse(url="/assets")
 
         validate_user_cookie = await login_for_access_token(response=response, form_data=form, db=db)
 
@@ -127,6 +133,11 @@ async def logout(request: Request):
     response = templates.TemplateResponse("login.html", {"request": request, "msg": msg})
     response.delete_cookie(key="access_token")
     return response
+
+
+@routers.get("/register", response_class=HTMLResponse)
+async def register(request: Request):
+    return templates.TemplateResponse("register.html", {"request": request})
 
 
 @routers.post("/register", response_class=HTMLResponse)

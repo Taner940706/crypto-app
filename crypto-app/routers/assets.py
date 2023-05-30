@@ -30,7 +30,7 @@ def get_db():
         db.close()
 
 
-@routers.get('/assets', response_class=HTMLResponse)
+@routers.get('/', response_class=HTMLResponse)
 async def get_all_assets(request: Request, db: Session = Depends(get_db)):
 
     user = await get_current_user(request)
@@ -44,7 +44,7 @@ async def get_all_assets(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
 
 
-@routers.get('assets/{id}', response_class=HTMLResponse)
+@routers.get('/{id}', response_class=HTMLResponse)
 async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
 
     user = await get_current_user(request)
@@ -58,7 +58,7 @@ async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
 
 
-@routers.get('assets/{id}/market', response_class=HTMLResponse)
+@routers.get('/{id}/market', response_class=HTMLResponse)
 async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
 
     user = await get_current_user(request)
@@ -72,7 +72,7 @@ async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
 
 
-@routers.get('assets/{id}/history', response_class=HTMLResponse)
+@routers.get('/{id}/history', response_class=HTMLResponse)
 async def get_assets_by_id(request: Request, db: Session = Depends(get_db)):
 
     user = await get_current_user(request)
