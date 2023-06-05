@@ -1,12 +1,9 @@
 import sys
-import json
-import urllib.request
-from fastapi import APIRouter, Request, Depends
-from sqlalchemy.orm import Session
+import requests
+from fastapi import APIRouter, Request
 from starlette import status
 from starlette.responses import HTMLResponse, RedirectResponse
 from starlette.templating import Jinja2Templates
-from database import SessionLocal
 from routers.auth import get_current_user
 
 sys.path.append("..")
@@ -21,39 +18,41 @@ routers = APIRouter(
 templates = Jinja2Templates(directory="templates")
 
 
-# session local for database
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 @routers.get('/', response_class=HTMLResponse)
-async def get_all_rates(request: Request, db: Session = Depends(get_db)):
+async def get_all_rates(request: Request):
 
     user = get_current_user(request)
 
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
+    url = 'https://api.coincap.io/v2/rates'
+
     # line for initialize API
-    source = urllib.request.urlopen('https://api.coincap.io/v2/rates').open()
-    data = json.loads(source)
+    payload = {}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    data = response.text
 
     return templates.TemplateResponse('rates.html', {"request": request, "user": user, "data": data})
 
 
 @routers.get('/{id}', response_class=HTMLResponse)
-async def get_rates_by_id(request: Request, db: Session = Depends(get_db)):
+async def get_rates_by_id(request: Request):
     user = get_current_user(request)
 
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
-    source = urllib.request.urlopen('https://api.coincap.io/v2/rates' + {id}).open()
-    data = json.loads(source)
+    url = 'https://api.coincap.io/v2/rates/' + id
+
+    # line for initialize API
+    payload = {}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    data = response.text
 
     return templates.TemplateResponse('rates.html', {"request": request, "user": user, "data": data})
