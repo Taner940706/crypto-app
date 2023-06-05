@@ -1,6 +1,6 @@
 import sys
 import requests
-
+import json
 from fastapi.templating import Jinja2Templates
 from fastapi import APIRouter, Request
 from starlette import status
@@ -29,7 +29,7 @@ async def get_all_assets(request: Request):
     url = "https://api.coincap.io/v2/assets"
 
     payload = {}
-    headers = {}
+    headers = {'Content-Type': 'application/json; charset=utf-8'}
 
     response = requests.request("GET", url, headers=headers, data=payload)
     data = response.text
