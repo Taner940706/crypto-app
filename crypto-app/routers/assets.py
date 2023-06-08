@@ -32,9 +32,10 @@ async def get_all_assets(request: Request):
     headers = {'Content-Type': 'application/json; charset=utf-8'}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    data = response.text
+    data = response.json()
+    coins = data['data']
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
+    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "coins": coins})
 
 
 @routers.get('/{id}', response_class=HTMLResponse)

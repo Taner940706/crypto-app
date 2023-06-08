@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Coin List</title>
+    <title>Coins List</title>
 </head>
 <body>
     <div class="col py-3">
@@ -17,12 +17,24 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Name</th>
+                        <th>Symbol</th>
+                        <th>Rank</th>
+                        <th>Supply</th>
+                        <th>Price (USD)</th>
+                        <th>Change in 24h (by percent)</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for d in data %}
+                    {% for coin in coins %}
                         <tr>
-                            <td>{{ d }}</td>
+                            <td>{{ coin.id }}</td>
+                            <td>{{ coin.name }}</td>
+                            <td>{{ coin.symbol }}</td>
+                            <td>{{ coin.rank }}</td>
+                            <td>{{ coin.supply }}</td>
+                            <td>{{ coin.priceUsd }}</td>
+                            <td>{{ coin.changePercent24Hr }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
