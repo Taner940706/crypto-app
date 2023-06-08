@@ -32,9 +32,10 @@ async def get_all_exchanges(request: Request):
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    data = response.text
+    data = response.json()
+    exchanges = data['data']
 
-    return templates.TemplateResponse('exchanges.html', {"request": request, "user": user, "data": data})
+    return templates.TemplateResponse('exchanges.html', {"request": request, "user": user, "exchanges": exchanges})
 
 
 @routers.get('/{id}', response_class=HTMLResponse)

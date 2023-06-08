@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Exchanges List</title>
 </head>
 <body>
+    <div class="col py-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="page-heading"><h1><i class="bi bi-list"></i>Exchanges List</h1></div>
+            </div>
+            <div class="panel-body">
+                <div class="div-action pull pull-right" style="padding-bottom:20px;">
+                </div>
+                <br>
+                <div class="remove-messages"></div>
+                <table class="table" id="manageExchangeTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Rank</th>
+                        <th>Total Volume (by percent)</th>
+                        <th>Volume (USD)</th>
+                        <th>URL</th>
+                        <th>Updated</th>
 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for exchange in exchanges %}
+                        <tr>
+                            <td>{{ exchange.id }}</td>
+                            <td>{{ exchange.name }}</td>
+                            <td>{{ exchange.rank }}</td>
+                            <td>{{ exchange.percentTotalVolume }}</td>
+                            <td>{{ exchange.volumeUsd }}</td>
+                            <td>{{ exchange.exchangeUrl }}</td>
+                            <td>{{ exchange.updated }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- check if have permissions -->
+
+    </div>
 </body>
 </html>
