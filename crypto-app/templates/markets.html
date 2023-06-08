@@ -1,10 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Markets List</title>
 </head>
 <body>
+    <div class="col py-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="page-heading"><h1><i class="bi bi-list"></i>Market List</h1></div>
+            </div>
+            <div class="panel-body">
+                <div class="div-action pull pull-right" style="padding-bottom:20px;">
+                </div>
+                <br>
+                <div class="remove-messages"></div>
+                <table class="table" id="manageMarketTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Rank</th>
+                        <th>Base Symbol</th>
+                        <th>Base ID</th>
+                        <th>Quote Symbol</th>
+                        <th>Quote ID</th>
+                        <th>Price Quote</th>
+                        <th>Price USD</th>
+                        <th>Exchange Volume (by percent)</th>
+                        <th>Trades Count (24 Hr)</th>
+                        <th>Updated</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for market in markets %}
+                        <tr>
+                            <td>{{ market.id }}</td>
+                            <td>{{ market.rank }}</td>
+                            <td>{{ market.baseSymbol }}</td>
+                            <td>{{ market.baseId }}</td>
+                            <td>{{ market.quoteSymbol }}</td>
+                            <td>{{ market.quoteId }}</td>
+                            <td>{{ market.priceQuote }}</td>
+                            <td>{{ market.priceUsd }}</td>
+                            <td>{{ market.volumeUsd24Hr }}</td>
+                            <td>{{ market.percentExchangeVolume }}</td>
+                            <td>{{ market.tradesCount24Hr }}</td>
+                            <td>{{ market.updated }}</td>
 
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- check if have permissions -->
+
+    </div>
 </body>
 </html>
