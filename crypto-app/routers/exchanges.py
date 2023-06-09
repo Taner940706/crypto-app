@@ -38,20 +38,20 @@ async def get_all_exchanges(request: Request):
     return templates.TemplateResponse('exchanges.html', {"request": request, "user": user, "exchanges": exchanges})
 
 
-@routers.get('/{id}', response_class=HTMLResponse)
-async def get_exchanges_by_id(request: Request):
+@routers.get('/{exchange_id}', response_class=HTMLResponse)
+async def get_exchanges_by_id(request: Request, exchange_id: str):
     user = get_current_user(request)
 
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
-    url = "https://api.coincap.io/v2/exchanges/" + id
+    url = "https://api.coincap.io/v2/exchanges/" + exchange_id
 
     # line for initialize API
     payload = {}
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    data = response.text
-
-    return templates.TemplateResponse('exchanges.html', {"request": request, "user": user, "data": data})
+    data = response.json()
+    exchange = data['data']
+    return templates.TemplateResponse('get_exchange_by_id.html', {"request": request, "user": user, "exchange": exchange})

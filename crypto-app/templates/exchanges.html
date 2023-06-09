@@ -23,19 +23,24 @@
                         <th>Volume (USD)</th>
                         <th>URL</th>
                         <th>Updated</th>
+                        <th>Actions</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     {% for exchange in exchanges %}
                         <tr>
-                            <td>{{ exchange.id }}</td>
+                            <td>{{ exchange.exchangeId }}</td>
                             <td>{{ exchange.name }}</td>
                             <td>{{ exchange.rank }}</td>
                             <td>{{ exchange.percentTotalVolume }}</td>
                             <td>{{ exchange.volumeUsd }}</td>
                             <td>{{ exchange.exchangeUrl }}</td>
                             <td>{{ exchange.updated }}</td>
+                            <td>
+                                <button onclick="window.location.href='/exchanges/{{exchange.exchangeId}}'"
+                        type="button" class="btn btn-danger">Show more</button>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
