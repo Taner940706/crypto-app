@@ -39,21 +39,22 @@ async def get_all_rates(request: Request):
     return templates.TemplateResponse('rates.html', {"request": request, "user": user, "rates": rates})
 
 
-@routers.get('/{id}', response_class=HTMLResponse)
-async def get_rates_by_id(request: Request):
+@routers.get('/{rate_id}', response_class=HTMLResponse)
+async def get_rates_by_id(request: Request, rate_id: str):
     user = get_current_user(request)
 
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     # line for initialize API
-    url = 'https://api.coincap.io/v2/rates/' + id
+    url = 'https://api.coincap.io/v2/rates/' + rate_id
 
     # line for initialize API
     payload = {}
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    data = response.text
+    data = response.json()
+    rate = data['data']
 
-    return templates.TemplateResponse('rates.html', {"request": request, "user": user, "data": data})
+    return templates.TemplateResponse('get_rates_by_id.html', {"request": request, "user": user, "rate": rate})
