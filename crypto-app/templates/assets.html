@@ -23,6 +23,7 @@
                         <th>Supply</th>
                         <th>Price (USD)</th>
                         <th>Change in 24h (by percent)</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,14 @@
                             <td>{{ coin.supply }}</td>
                             <td>{{ coin.priceUsd }}</td>
                             <td>{{ coin.changePercent24Hr }}</td>
+                            <td>
+                                <button onclick="window.location.href='/assets/{{coin.id}}'"
+                        type="button" class="btn btn-danger">Show more</button>
+                                <button onclick="window.location.href='/assets/{{coin.id}}/markets'"
+                        type="button" class="btn btn-danger">Market</button>
+                                <button onclick="window.location.href='/assets/{{coin.id}}/history'"
+                        type="button" class="btn btn-danger">History</button>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

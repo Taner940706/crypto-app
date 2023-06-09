@@ -38,58 +38,61 @@ async def get_all_assets(request: Request):
     return templates.TemplateResponse("assets.html", {"request": request, "user": user, "coins": coins})
 
 
-@routers.get('/{id}', response_class=HTMLResponse)
-async def get_assets_by_id(request: Request):
+@routers.get('/{asset_id}', response_class=HTMLResponse)
+async def get_assets_by_id(request: Request, asset_id: str):
 
     user = await get_current_user(request)
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
-    url = "https://api.coincap.io/v2/assets/" + id
+    url = "https://api.coincap.io/v2/assets/" + asset_id
 
     # line for initialize API
     payload = {}
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    data = response.text
+    data = response.json()
+    coin = data['data']
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
+    return templates.TemplateResponse("get_asset_by_id.html", {"request": request, "user": user, "coin": coin})
 
 
-@routers.get('/{id}/market', response_class=HTMLResponse)
-async def get_assets_by_id(request: Request):
+@routers.get('/{asset_id}/market', response_class=HTMLResponse)
+async def get_assets_by_id(request: Request, asset_id: str):
 
     user = await get_current_user(request)
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
-    url = "https://api.coincap.io/v2/assets/" + id + "/market"
+    url = "https://api.coincap.io/v2/assets/" + asset_id + "/markets"
 
     # line for initialize API
     payload = {}
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    data = response.text
+    data = response.json()
+    coin_market = data['data']
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
+    return templates.TemplateResponse("market_by_coin.html", {"request": request, "user": user, "coin_market": coin_market})
 
 
-@routers.get('/{id}/history', response_class=HTMLResponse)
-async def get_assets_by_id(request: Request):
+@routers.get('/{asset_id}/history', response_class=HTMLResponse)
+async def get_assets_by_id(request: Request, asset_id: str):
 
     user = await get_current_user(request)
     if user is None:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
-    url = "https://api.coincap.io/v2/assets/" + id + "/history"
+    url = "https://api.coincap.io/v2/assets/" + asset_id + "/history?interval=" + "d1"
 
     # line for initialize API
     payload = {}
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    data = response.text
+    data = response.json()
+    coin_history = data['data']
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "data": data})
+    return templates.TemplateResponse("history_by_coin.html", {"request": request, "user": user, "coin_history": coin_history})
