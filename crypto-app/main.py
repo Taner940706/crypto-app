@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import models
 from database import engine
 from routers import assets, exchanges, markets, rates, auth
-from fastapi.staticfiles import StaticFiles
+from starlette.staticfiles import StaticFiles
 
 
 app = FastAPI()
