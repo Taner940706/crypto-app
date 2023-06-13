@@ -33,9 +33,9 @@ async def get_all_assets(request: Request):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     data = response.json()
-    coins = data['data']
+    assets = data['data']
 
-    return templates.TemplateResponse("assets.html", {"request": request, "user": user, "coins": coins})
+    return templates.TemplateResponse("assets/assets.html", {"request": request, "user": user, "assets": assets})
 
 
 @routers.get('/{asset_id}', response_class=HTMLResponse)
@@ -53,9 +53,9 @@ async def get_assets_by_id(request: Request, asset_id: str):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     data = response.json()
-    coin = data['data']
+    assets = data['data']
 
-    return templates.TemplateResponse("get_asset_by_id.html", {"request": request, "user": user, "coin": coin})
+    return templates.TemplateResponse("assets/get_asset_by_id.html", {"request": request, "user": user, "assets": assets})
 
 
 @routers.get('/{asset_id}/market', response_class=HTMLResponse)
@@ -73,9 +73,9 @@ async def get_assets_by_id(request: Request, asset_id: str):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     data = response.json()
-    coin_market = data['data']
+    assets_market = data['data']
 
-    return templates.TemplateResponse("market_by_coin.html", {"request": request, "user": user, "coin_market": coin_market})
+    return templates.TemplateResponse("assets/get_market_by_assets.html", {"request": request, "user": user, "assets_market": assets_market})
 
 
 @routers.get('/{asset_id}/history', response_class=HTMLResponse)
@@ -93,6 +93,6 @@ async def get_assets_by_id(request: Request, asset_id: str):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     data = response.json()
-    coin_history = data['data']
+    assets_history = data['data']
 
-    return templates.TemplateResponse("history_by_coin.html", {"request": request, "user": user, "coin_history": coin_history})
+    return templates.TemplateResponse("assets/get_history_by_assets.html", {"request": request, "user": user, "assets_history": assets_history})

@@ -106,7 +106,7 @@ async def login_for_access_token(response: Response, form_data: OAuth2PasswordRe
 
 @routers.get("/", response_class=HTMLResponse)
 async def authentication_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse("auth/login.html", {"request": request})
 
 
 @routers.post("/", response_class=HTMLResponse)
@@ -120,11 +120,11 @@ async def login(request: Request, db: Session = Depends(get_db)):
 
         if not validate_user_cookie:
             msg = "Incorrect username or password"
-            return templates.TemplateResponse("login.html", {"request": request, "msg": msg})
+            return templates.TemplateResponse("auth/login.html", {"request": request, "msg": msg})
         return response
     except HTTPException:
         msg = "Unknown Error"
-        return templates.TemplateResponse("login.html", {"request": request, "msg": msg})
+        return templates.TemplateResponse("auth/login.html", {"request": request, "msg": msg})
 
 
 @routers.get("/logout")
@@ -137,7 +137,7 @@ async def logout(request: Request):
 
 @routers.get("/register", response_class=HTMLResponse)
 async def register(request: Request):
-    return templates.TemplateResponse("register.html", {"request": request})
+    return templates.TemplateResponse("auth/register.html", {"request": request})
 
 
 @routers.post("/register", response_class=HTMLResponse)
@@ -149,7 +149,7 @@ async def register_user(request: Request, email: str = Form(...), username: str 
 
     if password != password2 or validation1 is not None or validation2 is not None:
         msg = "Invalid registration!"
-        return templates.TemplateResponse("register.html", {"request": request, "msg": msg})
+        return templates.TemplateResponse("auth/register.html", {"request": request, "msg": msg})
 
     user_model = models.Users()
     user_model.username = username
@@ -163,4 +163,4 @@ async def register_user(request: Request, email: str = Form(...), username: str 
     db.commit()
 
     msg = "User successfully created!"
-    return templates.TemplateResponse("login.html", {"request": request, "msg": msg})
+    return templates.TemplateResponse("auth/login.html", {"request": request, "msg": msg})

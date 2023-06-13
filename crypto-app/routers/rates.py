@@ -36,7 +36,7 @@ async def get_all_rates(request: Request):
     data = response.json()
     rates = data['data']
 
-    return templates.TemplateResponse('rates.html', {"request": request, "user": user, "rates": rates})
+    return templates.TemplateResponse('rates/rates.html', {"request": request, "user": user, "rates": rates})
 
 
 @routers.get('/{rate_id}', response_class=HTMLResponse)
@@ -55,6 +55,6 @@ async def get_rates_by_id(request: Request, rate_id: str):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     data = response.json()
-    rate = data['data']
+    rates = data['data']
 
-    return templates.TemplateResponse('get_rates_by_id.html', {"request": request, "user": user, "rate": rate})
+    return templates.TemplateResponse('rates/get_rates_by_id.html', {"request": request, "user": user, "rates": rates})

@@ -35,7 +35,7 @@ async def get_all_exchanges(request: Request):
     data = response.json()
     exchanges = data['data']
 
-    return templates.TemplateResponse('exchanges.html', {"request": request, "user": user, "exchanges": exchanges})
+    return templates.TemplateResponse('exchanges/exchanges.html', {"request": request, "user": user, "exchanges": exchanges})
 
 
 @routers.get('/{exchange_id}', response_class=HTMLResponse)
@@ -53,5 +53,5 @@ async def get_exchanges_by_id(request: Request, exchange_id: str):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     data = response.json()
-    exchange = data['data']
-    return templates.TemplateResponse('get_exchange_by_id.html', {"request": request, "user": user, "exchange": exchange})
+    exchanges = data['data']
+    return templates.TemplateResponse('exchanges/get_exchange_by_id.html', {"request": request, "user": user, "exchanges": exchanges})

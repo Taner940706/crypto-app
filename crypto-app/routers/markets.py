@@ -46,4 +46,4 @@ async def get_all_markets(request: Request, db: Session = Depends(get_db)):
     data = response.json()
     markets = data['data']
 
-    return templates.TemplateResponse('markets.html', {"request": request, "user": user, "markets": markets})
+    return templates.TemplateResponse('markets/markets.html', {"request": request, "user": user, "markets": markets})
