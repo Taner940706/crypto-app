@@ -15,10 +15,6 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Rank</th>
-                        <th>Total Volume (by percent)</th>
-                        <th>Volume (USD)</th>
-                        <th>URL</th>
-                        <th>Updated</th>
                         <th>Actions</th>
 
                     </tr>
@@ -29,10 +25,6 @@
                             <td>{{ exchange.exchangeId }}</td>
                             <td>{{ exchange.name }}</td>
                             <td>{{ exchange.rank }}</td>
-                            <td>{{ exchange.percentTotalVolume }}</td>
-                            <td>{{ exchange.volumeUsd }}</td>
-                            <td>{{ exchange.exchangeUrl }}</td>
-                            <td>{{ exchange.updated }}</td>
                             <td>
                                 <button onclick="window.location.href='/exchanges/{{exchange.exchangeId}}'"
                         type="button" class="btn btn-danger">Show more</button>
