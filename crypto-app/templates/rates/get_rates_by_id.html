@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>{{rates}}</p>
-</body>
-</html>
+{% include 'base/base_auth.html' %}
+<div class="card">
+  <div class="card-header">
+    <h2>{{rates.id}}</h2>
+<p>{{rates.symbol}}</p>
+  </div>
+  <div class="card-body">
+	 <p class="card-text">{{ rates.currencySymbol }}</p>
+<p class="card-text">{{ rates.type }}</p>
+<p class="card-text">{{ rates.rateUsd}}</p>
+
+
+    <a href="#!" class="btn btn-danger">Go Back</a>
+  </div>
+</div>

@@ -14,9 +14,6 @@
                     <tr>
                         <th>ID</th>
                         <th>Symbol</th>
-                        <th>Currency Symbol</th>
-                        <th>Type</th>
-                        <th>Rate (USD)</th>
                         <th>Actions</th>
 
                     </tr>
@@ -26,9 +23,6 @@
                         <tr>
                             <td>{{ rate.id }}</td>
                             <td>{{ rate.symbol }}</td>
-                            <td>{{ rate.currencySymbol }}</td>
-                            <td>{{ rate.type }}</td>
-                            <td>{{ rate.rateUsd }}</td>
                             <td>
                                 <button onclick="window.location.href='/rates/{{rate.id}}'"
                         type="button" class="btn btn-danger">Show more</button>
