@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>{{assets}}</p>
-</body>
-</html>
+{% include 'base/base_auth.html' %}
+<div class="card">
+  <div class="card-header">
+    <h2>{{assets.id}}</h2>
+<p>{{assets.symbol}}</p>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{assets.name}}</h5>
+	 <p class="card-text">{{ assets.rank }}</p>
+         <p class="card-text">{{ assets.supply }}</p>
+          <p class="card-text">{{ assets.priceUsd }}</p>
+          <p class="card-text">{{ assets.changePercent24Hr }}</p>
+    <a href="#!" class="btn btn-danger">Go Back</a>
+  </div>
+</div>

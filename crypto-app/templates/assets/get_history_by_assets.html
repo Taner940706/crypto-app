@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>{{assets_history}}</p>
-</body>
-</html>
+{% include 'base/base_auth.html' %}
+<div class="card">
+  <div class="card-header">
+
+    <h2>{{asset.id}}</h2>
+<p>{{asset.symbol}}</p>
+  </div>
+
+  <div class="card-body">
+    {% for asset_history in assets_history %}
+    <h5 class="card-title">{{asset_history.name}}</h5>
+	 <p class="card-text">{{ asset_history.priceUsd }}</p>
+         <p class="card-text">{{ asset_history.time }}</p>
+    {% endfor %}
+    <a href="#!" class="btn btn-danger">Go Back</a>
+  </div>
+</div>

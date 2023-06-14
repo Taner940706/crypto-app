@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>{{assets_market}}</p>
-</body>
-</html>
+{% include 'base/base_auth.html' %}
+
+<div class="card">
+  <div class="card-header">
+      {% for asset_market in assets_market %}
+    <h2>{{ asset_market.baseId }}</h2>
+<p>{{ asset_market.baseSymbol }}</p>
+  </div>
+  <div class="card-body">
+
+	 <p class="card-text">{{ asset_market.exchangeId }}</p>
+         <p class="card-text">{{ asset_market.quoteId }}</p>
+<p class="card-text">{{ asset_market.quoteSymbol }}</p>
+         <p class="card-text">{{ asset_market.volumeUsd24Hr }}</p>
+<p class="card-text">{{ asset_market.priceUsd }}</p>
+         <p class="card-text">{{ asset_market.volumePercent }}</p>
+      {% endfor %}
+
+    <a href="#!" class="btn btn-danger">Go Back</a>
+  </div>
+</div>

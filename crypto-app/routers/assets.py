@@ -59,7 +59,7 @@ async def get_assets_by_id(request: Request, asset_id: str):
 
 
 @routers.get('/{asset_id}/market', response_class=HTMLResponse)
-async def get_assets_by_id(request: Request, asset_id: str):
+async def get_market_by_assets_by_id(request: Request, asset_id: str):
 
     user = await get_current_user(request)
     if user is None:
@@ -86,13 +86,17 @@ async def get_assets_by_id(request: Request, asset_id: str):
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
 
     url = "https://api.coincap.io/v2/assets/" + asset_id + "/history?interval=" + "d1"
+    url_asset = "https://api.coincap.io/v2/assets/" + asset_id
 
     # line for initialize API
     payload = {}
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
+    response_asset = requests.request("GET", url_asset, headers=headers, data=payload)
     data = response.json()
+    data_asset = response_asset.json()
     assets_history = data['data']
+    asset = data_asset['data']
 
-    return templates.TemplateResponse("assets/get_history_by_assets.html", {"request": request, "user": user, "assets_history": assets_history})
+    return templates.TemplateResponse("assets/get_history_by_assets.html", {"request": request, "user": user, "assets_history": assets_history, "asset": asset})
