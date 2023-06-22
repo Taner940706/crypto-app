@@ -11,7 +11,11 @@
     <h5 class="card-title">{{asset_history.name}}</h5>
 	 <p class="card-text">{{ asset_history.priceUsd }}</p>
          <p class="card-text">{{ asset_history.time }}</p>
+    <hr>
     {% endfor %}
-    <a href="#!" class="btn btn-danger">Go Back</a>
+    <div class="card-body mx-auto">
+                    <a type="button" href="javascript:history.back()"
+                       class="btn btn-sm btn-info text-white"> Go Back </a>
+                </div>
   </div>
 </div>
