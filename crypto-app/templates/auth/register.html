@@ -1,33 +1,68 @@
 {% include 'base/base.html' %}
-<form action="/auth/register" method="post">
-  <div class="container">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
+<!--<form action="/auth/register" method="post">-->
+<!--  <div class="container">-->
+<!--    <h1>Register</h1>-->
+<!--    <p>Please fill in this form to create an account.</p>-->
+<!--    <hr>-->
 
-    <label for="email"><b>Username</b></label>
+<!--    <label for="email"><b>Username</b></label>-->
+<!--    <input type="text" placeholder="Enter Username" name="username" id="username" required>-->
+
+<!--    <label for="email"><b>Email</b></label>-->
+<!--    <input type="text" placeholder="Enter Email" name="email" id="email" required>-->
+
+<!--    <label for="firstname"><b>First name</b></label>-->
+<!--    <input type="text" placeholder="Enter Email" name="firstname" id="firstname" required>-->
+
+<!--    <label for="lastname"><b>Last name</b></label>-->
+<!--    <input type="text" placeholder="Enter Email" name="lastname" id="lastname" required>-->
+
+<!--    <label for="password"><b>Password</b></label>-->
+<!--    <input type="password" placeholder="Enter Password" name="password" id="password" required>-->
+
+<!--    <label for="password2"><b>Repeat Password</b></label>-->
+<!--    <input type="password" placeholder="Repeat Password" name="password2" id="password2" required>-->
+<!--    <hr>-->
+<!--    <button type="submit" class="registerbtn">Register</button>-->
+<!--  </div>-->
+
+<!--  <div class="container signin">-->
+<!--    <p>Already have an account? <a href="#">Sign in</a>.</p>-->
+<!--  </div>-->
+<!--</form>-->
+
+ <form class="form-horizontal" action="/auth/register" method="post" id="registerForm"
+          enctype="multipart/form-data">
+        <fieldset>
+            <h1 id="register_h1">Crypto App</h1>
+            <section class="vh-50">
+                <div class="container py-5 h-55">
+                    <div class="row d-flex justify-content-center align-items-center h-50">
+                        <div class="col-12 col-md-8 col-lg-7 col-xl-5">
+                            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                                <div class="card-body p-5 text-center">
+                                    <h2>Registration</h2>
     <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
-    <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
-    <label for="firstname"><b>First name</b></label>
     <input type="text" placeholder="Enter Email" name="firstname" id="firstname" required>
 
-    <label for="lastname"><b>Last name</b></label>
     <input type="text" placeholder="Enter Email" name="lastname" id="lastname" required>
 
-    <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
-    <label for="password2"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="password2" id="password2" required>
-    <hr>
-    <button type="submit" class="registerbtn">Register</button>
-  </div>
-
-  <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
-  </div>
-</form>
-
+                                    <br>
+                                    <input type="submit" id="btn-register" class="btn btn-custom btn-lg btn-block"
+                                           value="Enter">
+                                    <hr/>
+                                    <a class="link-primary" href="/auth">You have a registration?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </fieldset>
+    </form>

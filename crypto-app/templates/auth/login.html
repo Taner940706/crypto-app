@@ -1,18 +1,46 @@
 {% include 'base/base.html' %}
 
-<h2>Login Form</h2>
+<!--<h2>Login Form</h2>-->
 
-<div id="id01" class="modal">
+<!--<div id="id01" class="modal">-->
 
-  <form class="modal-content animate" action="/auth" method="post">
-    <div class="container">
-<!--      <label for="uname"><b>Username</b></label>-->
-      <input type="text" placeholder="Enter Username" name="username" required>
+<!--  <form class="modal-content animate" action="/auth" method="post">-->
+<!--    <div class="container">-->
+<!--&lt;!&ndash;      <label for="uname"><b>Username</b></label>&ndash;&gt;-->
+<!--      <input type="text" placeholder="Enter Username" name="username" required>-->
 
-<!--      <label for="psw"><b>Password</b></label>-->
-      <input type="password" placeholder="Enter Password" name="password" required>
+<!--&lt;!&ndash;      <label for="psw"><b>Password</b></label>&ndash;&gt;-->
+<!--      <input type="password" placeholder="Enter Password" name="password" required>-->
 
-      <button type="submit">Login</button>
-    </div>
-  </form>
-</div>
+<!--      <button type="submit">Login</button>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
+
+<form class="form-horizontal" action="/auth" method="post" id="loginForm">
+        <fieldset>
+            <h1 id="login_h1">Crypto App</h1>
+            <section class="vh-50">
+                <div class="container py-5 h-40">
+                    <div class="row d-flex justify-content-center align-items-center h-30">
+                        <div class="col-12 col-md-8 col-lg-7 col-xl-5">
+                            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                                <div class="card-body p-5 text-center">
+                                    <h2>Login</h2>
+                                    <input type="text" placeholder="Enter Username" name="username" required>
+                                    <input type="password" placeholder="Enter Password" name="password" required>
+                                    <input type="hidden" name="next" value="{{ next }}">
+                                    <br>
+                                    <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block"
+                                           value="Enter">
+                                    <hr/>
+                                    <a class="link-primary" href="/auth/register">You don't have a
+                                        registration?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </fieldset>
+    </form>
