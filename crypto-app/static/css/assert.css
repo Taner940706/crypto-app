@@ -1,0 +1,27 @@
+#manageAssetsTable{
+    margin-left: 20px;
+     border-collapse: collapse;
+}
+
+th, td {
+  color: #343C7A;
+}
+
+#manageAssetsTable_length{
+    margin-left: 20px;
+    color: #343C7A;
+}
+
+#manageAssetsTable_filter label{
+    margin-right: 20px;
+    color: #343C7A;
+}
+
+.page-heading {
+    color: #343C7A;
+}
+
+.dataTables_info{
+    margin-left: 20px;
+    color: #343C7A;
+}

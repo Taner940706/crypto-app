@@ -22,6 +22,7 @@
     text-align: center;
     font-weight: bold;
     padding-bottom: 20px;
+    margin-top: 50px;
 }
 
 section h2 {
@@ -31,9 +32,18 @@ section h2 {
      padding-bottom: 20px;
 }
 
-#id_username{
-    margin-bottom:10px;
+/*#id_username{*/
+/*    margin-bottom:10px;*/
+/*}*/
+/*#id_password{*/
+/*    margin-bottom:10px;*/
+/*}*/
+
+.form-control {
+    margin-bottom: 10px;
 }
-#id_password{
-    margin-bottom:10px;
+
+#btn-login{
+    background-color: #343C7A;
+    color: white;
 }
