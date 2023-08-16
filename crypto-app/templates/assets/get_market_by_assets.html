@@ -1,28 +1,24 @@
 {% include 'base/base_auth.html' %}
-<h1>Market</h1>
-
-{% for asset_market in assets_market %}
-<div class="card">
-<!--    <h2>{{ asset_market.baseId }}</h2>-->
-<!--<p>{{ asset_market.baseSymbol }}</p>-->
-    <div class="card-header">
-        <p class="card-text">{{ asset_market.baseId }}</p>
-      <p class="card-text">{{ asset_market.baseSymbol }}</p>
-    </div>
-  <div class="card-body">
-
-	 <p class="card-text">{{ asset_market.exchangeId }}</p>
-         <p class="card-text">{{ asset_market.quoteId }}</p>
-<p class="card-text">{{ asset_market.quoteSymbol }}</p>
-         <p class="card-text">{{ asset_market.volumeUsd24Hr }}</p>
-<p class="card-text">{{ asset_market.priceUsd }}</p>
-         <p class="card-text">{{ asset_market.volumePercent }}</p>
-
-  </div>
-</div>
-{% endfor %}
-
 <div class="card-body mx-auto">
                     <a type="button" href="javascript:history.back()"
                        class="btn btn-sm btn-info text-white"> Go Back </a>
                 </div>
+<h1>Market</h1>
+{% for asset_market in assets_market %}
+<div class="card">
+    <div class="card-header">
+        <p class="card-text">Base ID: {{ asset_market.baseId }}</p>
+      <p class="card-text">Base symbol: {{ asset_market.baseSymbol }}</p>
+    </div>
+  <div class="card-body">
+
+	 <p class="card-text">Exchange ID: {{ asset_market.exchangeId }}</p>
+         <p class="card-text">Quite ID: {{ asset_market.quoteId }}</p>
+<p class="card-text">Quite symbol: {{ asset_market.quoteSymbol }}</p>
+         <p class="card-text">Volume for 24Hr{{ asset_market.volumeUsd24Hr }} $</p>
+<p class="card-text">Price: {{ asset_market.priceUsd }} $</p>
+         <p class="card-text">Volume: {{ asset_market.volumePercent }} %</p>
+
+  </div>
+</div>
+{% endfor %}

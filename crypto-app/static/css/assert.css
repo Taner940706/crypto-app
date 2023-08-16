@@ -25,3 +25,18 @@ th, td {
     margin-left: 20px;
     color: #343C7A;
 }
+
+h1{
+    padding-bottom: 60px;
+    padding-top: 60px;
+    text-align: center;
+}
+
+.card{
+    width: 500px;
+    text-align: center;
+    position: absolute;
+    left: 37%;
+    margin-bottom: 30px;
+}
+

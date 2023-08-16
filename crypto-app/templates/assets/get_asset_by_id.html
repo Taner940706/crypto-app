@@ -6,11 +6,11 @@
 <p>{{assets.symbol}}</p>
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{assets.name}}</h5>
-	 <p class="card-text">{{ assets.rank }}</p>
-         <p class="card-text">{{ assets.supply }}</p>
-          <p class="card-text">{{ assets.priceUsd }}</p>
-          <p class="card-text">{{ assets.changePercent24Hr }}</p>
+    <p class="card-title">Title: {{assets.name}}</p>
+	 <p class="card-text">Rank: {{ assets.rank }}</p>
+         <p class="card-text">Supple: {{ assets.supply }}</p>
+          <p class="card-text"> Price: {{ assets.priceUsd }} $</p>
+          <p class="card-text">Change by 24 Hr {{ assets.changePercent24Hr }} %</p>
     <div class="card-body mx-auto">
                     <a type="button" href="javascript:history.back()"
                        class="btn btn-sm btn-info text-white"> Go Back </a>

@@ -1,16 +1,16 @@
 {% include 'base/base_auth.html' %}
+
+<h1>Price history of {{asset.id}} (24Hr)</h1>
 <div class="card">
   <div class="card-header">
-
     <h2>{{asset.id}}</h2>
 <p>{{asset.symbol}}</p>
   </div>
 
   <div class="card-body">
     {% for asset_history in assets_history %}
-    <h5 class="card-title">{{asset_history.name}}</h5>
-	 <p class="card-text">{{ asset_history.priceUsd }}</p>
-         <p class="card-text">{{ asset_history.time }}</p>
+	 <p class="card-text">Price: {{ asset_history.priceUsd }}</p>
+         <p class="card-text">Time: {{ asset_history.time }}</p>
     <hr>
     {% endfor %}
     <div class="card-body mx-auto">
