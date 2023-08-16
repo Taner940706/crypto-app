@@ -98,5 +98,7 @@ async def get_assets_by_id(request: Request, asset_id: str):
     data_asset = response_asset.json()
     assets_history = data['data']
     asset = data_asset['data']
+    print(assets_history)
+    print(asset)
 
     return templates.TemplateResponse("assets/get_history_by_assets.html", {"request": request, "user": user, "assets_history": assets_history, "asset": asset})

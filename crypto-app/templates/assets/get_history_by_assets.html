@@ -9,8 +9,8 @@
 
   <div class="card-body">
     {% for asset_history in assets_history %}
+      <p class="card-text">Date: {{ asset_history.date.split("T")[0] }}</p>
 	 <p class="card-text">Price: {{ asset_history.priceUsd }}</p>
-         <p class="card-text">Time: {{ asset_history.time }}</p>
     <hr>
     {% endfor %}
     <div class="card-body mx-auto">
