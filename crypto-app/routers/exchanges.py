@@ -1,6 +1,7 @@
 import sys
 import requests
 from fastapi import APIRouter, Request
+from jinja2 import Environment, FileSystemLoader
 from starlette import status
 from starlette.responses import HTMLResponse, RedirectResponse
 from starlette.templating import Jinja2Templates
@@ -13,6 +14,7 @@ routers = APIRouter(
     tags=["exchanges"],
     responses={404: {"description": "Not found!"}}
 )
+
 
 templates = Jinja2Templates(directory="templates")
 

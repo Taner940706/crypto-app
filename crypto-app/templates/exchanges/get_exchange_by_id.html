@@ -5,11 +5,11 @@
     <h2>{{exchanges.name}}</h2>
   </div>
   <div class="card-body">
-	 <p class="card-text">{{ exchanges.rank }}</p>
-<p class="card-text">{{ exchanges.percentTotalVolume }}</p>
-<p class="card-text">{{ exchanges.volumeUsd }}</p>
-<p class="card-text">{{ exchanges.tradingPairs }}</p>
-    <a href="{{ exchanges.exchangeUrl }}" target="_blank">{{ exchanges.exchangeUrl }}</a>
+	 <p class="card-text">Rank: {{ exchanges.rank }}</p>
+<p class="card-text">Total volume (in percent): {{ exchanges.percentTotalVolume|float|round(5) }} %</p>
+<p class="card-text">Volume (in USD) {{ exchanges.volumeUsd }} $</p>
+<p class="card-text">Trading pairs: {{ exchanges.tradingPairs }}</p>
+      <p class="card-text">Link: <a href="{{ exchanges.exchangeUrl }}" target="_blank">{{ exchanges.exchangeUrl }}</a></p>
 <p class="card-text">{{ exchanges.updated }}</p>
 
     <div class="card-body mx-auto">

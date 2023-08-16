@@ -35,10 +35,10 @@
                             <td>{{ market.quoteSymbol }}</td>
                             <td>{{ market.quoteId }}</td>
                             <td>{{ market.priceQuote }}</td>
-                            <td>{{ market.priceUsd }}</td>
-                            <td>{{ market.percentExchangeVolume }}</td>
+                            <td>{{ market.priceUsd }} $</td>
+                            <td>{{ market.percentExchangeVolume|float|round(2) }} %</td>
                             <td>{{ market.tradesCount24Hr }}</td>
-                            <td>{{ market.updated }}</td>
+                            <td>{{ market.updated}}</td>
 
                         </tr>
                     {% endfor %}
