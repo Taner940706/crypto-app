@@ -20,6 +20,12 @@ section h2 {
      padding-bottom: 20px;
 }
 
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /*#id_username{*/
 /*    margin-bottom:10px;*/
 /*}*/
