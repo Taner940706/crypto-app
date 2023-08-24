@@ -24,6 +24,15 @@
 </head>
 <body>
 
+<nav>
+        <ul>
+            <li><a href="{{ url_for('get_all_assets') }}">Assets</a></li>
+            <li><a href="{{ url_for('get_all_exchanges') }}">Exchanges</a></li>
+            <li><a href="{{ url_for('get_all_markets') }}">Markets</a></li>
+            <li><a href="{{ url_for('get_all_rates') }}">Rates</a></li>
+        </ul>
+    </nav>
+
 
 {% block content %}
 
