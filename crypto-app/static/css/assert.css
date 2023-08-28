@@ -48,4 +48,9 @@ img{
   margin-left: auto;
   margin-right: auto;
 }
+.card-body.mx-auto{
+    position: sticky;
+    top: 40px;
+
+}
 

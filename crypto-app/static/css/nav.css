@@ -2,10 +2,14 @@ nav {
     background-color: #343C7A;
     margin: 0;
     overflow: hidden;
+    position: sticky;
+    top: 0;
 }
 nav ul{
-    margin: 0;
+    /*margin: 0;*/
     padding: 0;
+    margin-left: 20px;
+    margin-bottom: 0;
 }
 nav ul li {
     /* This allow us to arrange list items in a row, without using float */
@@ -21,4 +25,19 @@ nav > ul > li > a {
     line-height: 2em;
     padding: 0.5em 0.5em;
     text-decoration: none;
+}
+
+p{
+    color: white;
+    text-align: right;
+    background-color:#343C7A;
+    display: block;
+    line-height: 2em;
+    padding: 0.5em 0.5em;
+    text-decoration: none;
+    margin-left: 100px;
+}
+
+nav > ul > li > a:hover {
+    color:yellow;
 }
